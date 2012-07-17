@@ -42,3 +42,21 @@ def validate_oauth_signature(web, secret):
         "expect":expect
         }
 
+def generate_url(web, host):
+    post_dict = web['POST_DICT']
+    url = 'http://%(host)s/%(app_id)s/%(module_id)s/?guid=ON&url=%(url)s' % {
+            'host'      : host,
+            'app_id'    : post_dict['field_app_id'][0],
+            'module_id' : post_dict['field_module_id'][0],
+            'url'       : post_dict['field_url'][0],
+            }
+    return {
+        'raw':url,
+        'enc':urllib.quote_plus(url),
+    }
+
+def get_host_uri(url):
+    return {
+        'raw':u'http://%s/'%url,
+        'enc':urllib.quote_plus(u'http://%s/'%url),
+        }

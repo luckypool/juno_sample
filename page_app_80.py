@@ -2,54 +2,29 @@
 # -*- coding: utf-8 -*-
 from juno import *
 import urllib
-from my_valid import validate_oauth_signature
+import yaml
+import codecs
+from mymod import validate_oauth_signature
+from mymod import generate_url
+from mymod import get_host_uri
 
-HOST            = '219.94.242.161'
+fh  = codecs.open('./config/config.yaml','r','utf8')
+cfg = yaml.load(fh)
+
+CONSUMER_SECRET = cfg[50080]['secret']
+HOST            = cfg['HOST']
+MIXI_HOST       = cfg['MPA_HOST']
 MY_HOST         = '%s:50080'%HOST
 OTHER_HOST      = '%s:50081'%HOST
-CONSUMER_SECRET = '9205431840be1c4f163b49c6bc99c06be6d01f65'
-MIXI_HOST       = 'mpa.mixi.net'
 
-init({'use_debugger': True,})
-
-app_data = {
-    'title' : u'初めてのﾍﾟｰｼﾞｱﾌﾟﾘﾓﾊﾞｲﾙ',
-    'page'  : {
-        'id': 271847,
-        'module_id': {
-            'self' :1530801,
-            'other':1530802
-        },
-    },
-    'other_page' : {
-        'id' : 271848,
-        'module_id' : {
-            'self' : 1530808,
-        },
-    }
-}
-
-def get_host_uri(url):
-    return {
-        'raw':u'http://%s/'%url,
-        'enc':urllib.quote_plus(u'http://%s/'%url),
-        }
+app_data = {'title' : u'初めてのﾍﾟｰｼﾞｱﾌﾟﾘﾓﾊﾞｲﾙ'}
+app_data.update({'page':cfg[50080]['page']})
+app_data.update({'other_page':cfg[50080]['other_page']})
 app_data.update({'my_service_uri':get_host_uri(MY_HOST+'/m')})
 app_data.update({'other_service_uri':get_host_uri(OTHER_HOST+'/m')})
 app_data.update({'mixi_uri':get_host_uri(MIXI_HOST)})
 
-def generate_url(web):
-    post_dict = web['POST_DICT']
-    url = 'http://%(host)s/%(app_id)s/%(module_id)s/?guid=ON&url=%(url)s' % {
-            'host'      : MIXI_HOST,
-            'app_id'    : post_dict['field_app_id'][0],
-            'module_id' : post_dict['field_module_id'][0],
-            'url'       : post_dict['field_url'][0],
-            }
-    return {
-        'raw':url,
-        'enc':urllib.quote_plus(url),
-    }
+init({'use_debugger': True,})
 
 @route('/m')
 def index(web):
@@ -67,7 +42,7 @@ def index(web):
 def index(web):
     if (web['REQUEST_METHOD']!='POST'):
         return template('404.html', {"error":"405: Method Not Allowed"})
-    app_data.update({'generated_url':generate_url(web)})
+    app_data.update({'generated_url':generate_url(web, MIXI_HOST)})
     return template('url.html',{'app_data':app_data,'name':u'別ﾍﾟｰｼﾞだよ'})
 
 if __name__ == '__main__':

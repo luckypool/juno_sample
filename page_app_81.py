@@ -2,34 +2,27 @@
 # -*- coding: utf-8 -*-
 from juno import *
 import urllib
-import sha
-import hmac
-import re
-from my_valid import validate_oauth_signature
+import yaml
+import codecs
+from mymod import validate_oauth_signature
+from mymod import get_host_uri
 
-HOST            = '291.94.24.161'
+fh = codecs.open('./config/config.yaml','r','utf8')
+cfg = yaml.load(fh)
+
+CONSUMER_SECRET = cfg[50081]['secret']
+HOST            = cfg['HOST']
+MIXI_HOST       = cfg['MPA_HOST']
 MY_HOST         = '%s:50081'%HOST
 OTHER_HOST      = '%s:50080'%HOST
-CONSUMER_SECRET = '4f1b49683604271dbb1168a277021887e37459e5'
-MIXI_HOST       = 'mpa.mixi.net'
 
-
-#debugger使用時に指定。werkzeugのdebuggerで表示される。
-init({'use_debugger': True,})
-
-app_data = {
-    'title'    : u'続・初めてのﾍﾟｰｼﾞｱﾌﾟﾘﾓﾊﾞｲﾙ',
-}
-
-def get_host_uri(url):
-    return {
-        'raw':u'http://%s/'%url,
-        'enc':urllib.quote_plus(u'http://%s/'%url),
-        }
+app_data = {'title': u'続・初めてのﾍﾟｰｼﾞｱﾌﾟﾘﾓﾊﾞｲﾙ'}
 app_data.update({'host':MY_HOST})
 app_data.update({'my_service_uri':get_host_uri(MY_HOST+'/m')})
 app_data.update({'other_service_uri':get_host_uri(OTHER_HOST+'/m')})
 app_data.update({'mixi_uri':get_host_uri(MIXI_HOST)})
+
+init({'use_debugger': True,})
 
 @route('/m')
 def index(web):
