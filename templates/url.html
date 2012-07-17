@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html PUBLIC "-//i-mode group (ja)//DTD XHTML i-XHTML(Locale/Ver.=ja/1.0) 1.0//EN" "i-xhtml_4ja_10.dtd">
+<html xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=Shift_JIS" />
+    <title>{{ app_data['title'] }}</title>
+</head>
+<body>
+<div style="text-align:center;">
+    <h3>{{ app_data['title'] }}</h3>
+    <hr />
+    ＊＊＊＊ここは＊＊＊＊
+    <h3>{{ name }}</h3>
+    ＊＊＊＊だよ。＊＊＊＊
+    <hr />
+    <h3>生成したリンク</h3>
+    <p>
+    <a href="{{ app_data['generated_url']['raw'] }}">{{ app_data['generated_url']['raw'] }}</a>
+    </p>
+    <hr />
+    <a href="?guid=ON&url=">ﾄｯﾌﾟﾍﾟｰｼﾞ</a>
+    <hr />
+</div>
+</body>
+</html>
+
