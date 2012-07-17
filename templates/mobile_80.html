@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html PUBLIC "-//i-mode group (ja)//DTD XHTML i-XHTML(Locale/Ver.=ja/1.0) 1.0//EN" "i-xhtml_4ja_10.dtd">
+<html xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=Shift_JIS" />
+        <title>{{ app_data['title'] }}</title>
+    </head>
+    <body>
+    <div style="text-align:center;">
+        <h3>{{ app_data['title'] }}</h3>
+        <hr />
+        ＊＊＊＊ここは＊＊＊＊
+        <h3>{{ name }}</h3>
+        ＊＊＊＊だよ。＊＊＊＊
+        <hr />
+        <h3>初めてのﾌｧﾝﾍﾟｰｼﾞ</h3>
+        このページ内へのリンク
+        <p>
+        初めてのﾌｧﾝｱﾌﾟﾘ: <br />
+        <a href="{{ app_data['host'] }}/{{ app_data['page']['id'] }}/{{ app_data['page']['module_id']['self'] }}/">top</a> | 
+        <a href="?url={{ app_data['my_service_uri']['enc'] }}hello">url指定</a>
+        </p>
+        <p>
+        初めてのﾍﾟｰｼﾞｱﾌﾟﾘ: <br />
+        <a href="{{ app_data['host'] }}/{{ app_data['page']['id'] }}/{{ app_data['page']['module_id']['other'] }}/">top</a> | 
+        <a href="{{ app_data['host'] }}/{{ app_data['page']['id'] }}/{{ app_data['page']['module_id']['other'] }}/?url={{ app_data['other_service_uri']['enc'] }}hello">url指定</a>
+        </p>
+        <h3>ﾓﾊﾞｲﾙのﾃｽﾄﾍﾟｰｼﾞ</h3>
+        別ページへのリンク
+        <p>
+        初めてのﾍﾟｰｼﾞｱﾌﾟﾘ: <br />
+        <a href="{{ app_data['host'] }}/{{ app_data['other_page']['id'] }}/{{ app_data['other_page']['module_id']['self'] }}/">top</a> | 
+        <a href="{{ app_data['host'] }}/{{ app_data['other_page']['id'] }}/{{ app_data['other_page']['module_id']['self'] }}/?url={{ app_data['other_service_uri']['enc'] }}hello">url指定</a>
+        </p>
+        <hr />
+        <h3>app_idとmodule_idとurlを指定</h3>
+        <form action="?guid=ON&url={{ app_data['my_service_uri']['raw'] }}url" method="post">
+            {{ app_data['mixi_uri']['raw'] }}<br />
+            <input name="field_app_id" size=5 type="text" value="{{ app_data['page']['id'] }}" />
+            /
+            <input name="field_module_id" size=5 type="text" value="{{ app_data['page']['module_id']['self']}}" />
+            <br />
+            /?guid=ON&amp;url=<br />
+            <input name="field_url" size=30 type="text" value="{{ app_data['my_service_uri']['raw'] }}hello" />
+            <br />
+            <input type="submit" value="ﾘﾝｸ生成" />
+        </form>
+        (urlパラメータはエンコード前でおｋ)
+        <hr />
+        OAuth Signature
+        <p>
+            got: <br />
+            {{ app_data['oauth_signature']['got'] }}
+        </p>
+        <p>
+            expect: <br />
+            {{ app_data['oauth_signature']['expect'] }}
+        </p>
+        {% if app_data['oauth_signature']['result'] is sameas false %}
+        <div style="text-align:center; background-color:#c00; color:white;">
+        {% else %}
+        <div style="text-align:center; background-color:#00c; color:white;">
+        {% endif %}
+        <b>{{ app_data['oauth_signature']['result'] }}</b>
+        </div>
+        <hr />
+    </div>
+    </body>
+</html>
+

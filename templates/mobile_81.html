@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<!DOCTYPE html PUBLIC "-//i-mode group (ja)//DTD XHTML i-XHTML(Locale/Ver.=ja/1.0) 1.0//EN" "i-xhtml_4ja_10.dtd">
+<html xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=Shift_JIS" />
+        <title>{{ app_data['title'] }}</title>
+    </head>
+    <body>
+    <div style="text-align:center;">
+        <h3>{{ app_data['title'] }}</h3>
+        <hr />
+        ＊＊＊＊ここは＊＊＊＊
+        <h3>{{ name }}</h3>
+        ＊＊＊＊だよ。＊＊＊＊
+        <hr />
+        <p>
+        page_id: {{ app_data['mixi_page_id'] }}
+        </p>
+        <p>
+        module_id: {{ app_data['mixi_module_id'] }}
+        </p>
+        <p>
+        host: {{ app_data['host'] }}
+        </p>
+        <p>
+        request_uri: {{ app_data['request_uri'] }}
+        </p>
+        <hr />
+        OAuth Signature
+        <p>
+            got: <br />
+            {{ app_data['oauth_signature']['got'] }}
+        </p>
+        <p>
+            expect: <br />
+            {{ app_data['oauth_signature']['expect'] }}
+        </p>
+        {% if app_data['oauth_signature']['result'] is sameas false %}
+        <div style="background-color:#c00; color:white;">
+        {% else %}
+        <div style="background-color:#00c; color:white;">
+        {% endif %}
+        <b>{{ app_data['oauth_signature']['result'] }}</b>
+        </div>
+        <hr />
+    </div>
+    </body>
+</html>
+
+
+
+
