@@ -28,6 +28,9 @@ init({'use_debugger': True,})
 
 @route('/m')
 def index(web):
+    if (web['REQUEST_METHOD']=='POST'):
+        app_data.update({'generated_url':generate_url(web, MIXI_HOST)})
+        return template('url.html',{'app_data':app_data,'name':u'別ﾍﾟｰｼﾞ'})
     app_data.update(web['input'])
     app_data.update({'oauth_signature':validate_oauth_signature(web,CONSUMER_SECRET)})
     return template('mobile_80.html',{'app_data':app_data, 'name':u'ﾄｯﾌﾟﾍﾟｰｼﾞ'})
@@ -36,14 +39,14 @@ def index(web):
 def index(web):
     app_data.update(web['input'])
     app_data.update({'oauth_signature':validate_oauth_signature(web,CONSUMER_SECRET)})
-    return template('mobile_80.html',{'app_data':app_data,'name':u'別ﾍﾟｰｼﾞだよ'})
+    return template('mobile_80.html',{'app_data':app_data,'name':u'別ﾍﾟｰｼﾞ'})
 
 @route('/m/url')
 def index(web):
     if (web['REQUEST_METHOD']!='POST'):
         return template('404.html', {"error":"405: Method Not Allowed"})
     app_data.update({'generated_url':generate_url(web, MIXI_HOST)})
-    return template('url.html',{'app_data':app_data,'name':u'別ﾍﾟｰｼﾞだよ'})
+    return template('url.html',{'app_data':app_data,'name':u'別ﾍﾟｰｼﾞ'})
 
 if __name__ == '__main__':
     config('dev_port',50080)

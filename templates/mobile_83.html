@@ -15,25 +15,24 @@
     <hr />
     <h3>OK(ｱﾌﾟﾘ内へ遷移)</h3>
     <p>
-    <a href="{{ app_data['mixi_uri']['raw'] }}{{ app_data['id']['self'] }}/?guid=ON">ﾄｯﾌﾟﾍﾟｰｼﾞ</a>
-    <a href="?guid=ON&url={{ app_data['my_service_uri']['enc'] }}hello">別ﾍﾟｰｼﾞ</a>
+    (1) <a href="{{ app_data['mixi_uri']['raw'] }}{{ app_data['id']['self'] }}/?guid=ON">ﾄｯﾌﾟﾍﾟｰｼﾞ</a>
+    (2) <a href="?guid=ON&url={{ app_data['my_service_uri']['enc'] }}hello">別ﾍﾟｰｼﾞ(url指定)</a>
     </p>
     <h3>OK(別ｱﾌﾟﾘtopへ遷移)</h3>
     <p>
-    <a href="{{ app_data['mixi_uri']['raw'] }}{{ app_data['id']['other'] }}/">初めてのﾓﾊﾞｲﾙｱﾌﾟﾘ 2nd</a>
+    (3) <a href="{{ app_data['mixi_uri']['raw'] }}{{ app_data['id']['other'] }}/">初めてのﾓﾊﾞｲﾙｱﾌﾟﾘ 2nd</a>
     </p>
 
     <h3>NG(別ｱﾌﾟﾘtop以外へ遷移)</h3>
     <p>
-    <a href="{{ app_data['mixi_uri']['raw'] }}{{ app_data['id']['other'] }}/?guid=ON&url={{ app_data['other_service_uri']['enc'] }}hello">初めてのﾓﾊﾞｲﾙｱﾌﾟﾘ2ndのurlﾊﾟﾗﾒｰﾀ指定</a>
+    (4) <a href="{{ app_data['mixi_uri']['raw'] }}{{ app_data['id']['other'] }}/?guid=ON&url={{ app_data['other_service_uri']['enc'] }}hello">初めてのﾓﾊﾞｲﾙｱﾌﾟﾘ2ndのurlﾊﾟﾗﾒｰﾀ指定</a>
     </p>
     <hr />
     <h3>app_idとurlを指定</h3>
-    <form action="?guid=ON&url={{ app_data['my_service_uri']['raw'] }}url" method="post">
-        {{ app_data['mixi_uri']['raw'] }}<br />
+    <form action="./?guid=ON&url={{ app_data['my_service_uri']['raw'] }}url" method="post">
         <input name="field_app_id" size=5 type="text" value="{{ app_data['id']['self'] }}" />
         /?guid=ON&amp;url=<br />
-        <input name="field_url" size=30 type="text" value="http://www.google.com/" />
+        <input name="field_url" size=30 type="text" value="{{ app_data['my_service_uri']['raw'] }}hello/hello" />
         <br />
         <input type="submit" value="ﾘﾝｸ生成" />
     </form>

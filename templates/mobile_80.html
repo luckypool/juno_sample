@@ -13,35 +13,32 @@
         <h3>{{ name }}</h3>
         ＊＊＊＊だよ。＊＊＊＊
         <hr />
-        <h3>初めてのﾌｧﾝﾍﾟｰｼﾞ</h3>
-        このページ内へのリンク
+        <h3>S.A.C. 1st内のﾘﾝｸ</h3>
         <p>
-        初めてのﾌｧﾝｱﾌﾟﾘ: <br />
-        <a href="{{ app_data['host'] }}/{{ app_data['page']['id'] }}/{{ app_data['page']['module_id']['self'] }}/">top</a> | 
-        <a href="?url={{ app_data['my_service_uri']['enc'] }}hello">url指定</a>
+        初めてのﾍﾟｰｼﾞｱﾌﾟﾘﾓﾊﾞｲﾙ: <br />
+        (1) <a href="{{ app_data['host'] }}/{{ app_data['page']['id'] }}/{{ app_data['page']['module_id']['self'] }}/">top</a> | 
+        (2) <a href="?url={{ app_data['my_service_uri']['enc'] }}hello">url指定</a>
         </p>
         <p>
-        初めてのﾍﾟｰｼﾞｱﾌﾟﾘ: <br />
-        <a href="{{ app_data['host'] }}/{{ app_data['page']['id'] }}/{{ app_data['page']['module_id']['other'] }}/">top</a> | 
-        <a href="{{ app_data['host'] }}/{{ app_data['page']['id'] }}/{{ app_data['page']['module_id']['other'] }}/?url={{ app_data['other_service_uri']['enc'] }}hello">url指定</a>
+        続･初めてのﾍﾟｰｼﾞｱﾌﾟﾘﾓﾊﾞｲﾙ: <br />
+        (3) <a href="{{ app_data['host'] }}/{{ app_data['page']['id'] }}/{{ app_data['page']['module_id']['other'] }}/">top</a> | 
+        (4) <a href="{{ app_data['host'] }}/{{ app_data['page']['id'] }}/{{ app_data['page']['module_id']['other'] }}/?url={{ app_data['other_service_uri']['enc'] }}hello">url指定</a>
         </p>
-        <h3>ﾓﾊﾞｲﾙのﾃｽﾄﾍﾟｰｼﾞ</h3>
-        別ページへのリンク
+        <h3>S.A.C. 2ndへのﾘﾝｸ</h3>
         <p>
-        初めてのﾍﾟｰｼﾞｱﾌﾟﾘ: <br />
-        <a href="{{ app_data['host'] }}/{{ app_data['other_page']['id'] }}/{{ app_data['other_page']['module_id']['self'] }}/">top</a> | 
-        <a href="{{ app_data['host'] }}/{{ app_data['other_page']['id'] }}/{{ app_data['other_page']['module_id']['self'] }}/?url={{ app_data['other_service_uri']['enc'] }}hello">url指定</a>
+        続･初めてのﾍﾟｰｼﾞｱﾌﾟﾘﾓﾊﾞｲﾙ: <br />
+        (5) <a href="{{ app_data['host'] }}/{{ app_data['other_page']['id'] }}/{{ app_data['other_page']['module_id']['self'] }}/">top</a> | 
+        (6) <a href="{{ app_data['host'] }}/{{ app_data['other_page']['id'] }}/{{ app_data['other_page']['module_id']['self'] }}/?url={{ app_data['other_service_uri']['enc'] }}hello">url指定</a>
         </p>
         <hr />
-        <h3>app_idとmodule_idとurlを指定</h3>
-        <form action="?guid=ON&url={{ app_data['my_service_uri']['raw'] }}url" method="post">
-            {{ app_data['mixi_uri']['raw'] }}<br />
-            <input name="field_app_id" size=5 type="text" value="{{ app_data['page']['id'] }}" />
+        <h3>page_idとmodule_idとurlを指定</h3>
+        <form action="./?guid=ON&url={{ app_data['my_service_uri']['raw'] }}url/" method="post">
+            <input name="field_app_id" size=10 type="text" value="{{ app_data['page']['id'] }}" />
             /
-            <input name="field_module_id" size=5 type="text" value="{{ app_data['page']['module_id']['self']}}" />
+            <input name="field_module_id" size=10 type="text" value="{{ app_data['page']['module_id']['other']}}" />
             <br />
             /?guid=ON&amp;url=<br />
-            <input name="field_url" size=30 type="text" value="{{ app_data['my_service_uri']['raw'] }}hello" />
+            <input name="field_url" size=30 type="text" value="{{ app_data['other_service_uri']['raw'] }}hello/hello" />
             <br />
             <input type="submit" value="ﾘﾝｸ生成" />
         </form>

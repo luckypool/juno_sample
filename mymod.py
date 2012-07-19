@@ -44,15 +44,26 @@ def validate_oauth_signature(web, secret):
 
 def generate_url(web, host):
     post_dict = web['POST_DICT']
-    url = 'http://%(host)s/%(app_id)s/%(module_id)s/?guid=ON&url=%(url)s' % {
+    module_id = ''
+    if post_dict.has_key('field_module_id'):
+        module_id = '/'+post_dict['field_module_id'][0]
+    url = 'http://%(host)s/%(app_id)s%(module_id)s/?guid=ON&url=%(url)s' % {
             'host'      : host,
             'app_id'    : post_dict['field_app_id'][0],
-            'module_id' : post_dict['field_module_id'][0],
+            'module_id' : module_id,
             'url'       : post_dict['field_url'][0],
             }
+    req = '/%(app_id)s%(module_id)s/?guid=ON&url=%(url)s' % {
+            'app_id'    : post_dict['field_app_id'][0],
+            'module_id' : module_id,
+            'url'       : post_dict['field_url'][0],
+            }
+
     return {
         'raw':url,
         'enc':urllib.quote_plus(url),
+        'req':req,
+        'req_enc':urllib.quote_plus(req),
     }
 
 def get_host_uri(url):

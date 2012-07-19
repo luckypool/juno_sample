@@ -21,6 +21,7 @@ app_data.update({'host':MY_HOST})
 app_data.update({'my_service_uri':get_host_uri(MY_HOST+'/m')})
 app_data.update({'other_service_uri':get_host_uri(OTHER_HOST+'/m')})
 app_data.update({'mixi_uri':get_host_uri(MIXI_HOST)})
+app_data.update({'other_page':cfg[50080]['page']})
 
 init({'use_debugger': True,})
 
@@ -36,7 +37,7 @@ def index(web,name):
     app_data.update({'request_uri':web['REQUEST_URI']})
     app_data.update(web['input'])
     app_data.update({'oauth_signature':validate_oauth_signature(web,CONSUMER_SECRET)})
-    return template('mobile_81.html',{'app_data':app_data,'name':name})
+    return template('mobile_81.html',{'app_data':app_data,'name':u'別ﾍﾟｰｼﾞ(%s)'%name})
 
 if __name__ == '__main__':
     config('dev_port',50081)
